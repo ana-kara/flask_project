@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Flasky - classify{% endblock %}
+
+{% block page_content %}
+<div class="container">
+
+
+<div class="jumbotron" style="background-color: #FFC0CB; padding-top: 90px; padding-bottom: 90px">
+    <h2>Identify your minerals!</h2>
+    <br>
+    <br>
+    <p>Upload a picture of a mineral to classify it as either halite, fluorite, quartz or calcite.</p>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      <div class="form-group">
+        <input type="file" name="image">
+     </div>
+     <br>
+      <button type="submit" class="btn btn-primary">Categorize</button>
+    </form>
+  </div>
+
+
+
+</div>
+{% endblock %}

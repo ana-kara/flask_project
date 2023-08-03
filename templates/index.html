@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+     .section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #f6e9e9;
+            padding: 70px;
+            margin: 0;
+        }
+
+        .left {
+            flex-basis: 30%;
+            text-align: center;
+        }
+
+        .right {
+            flex-basis: 30%;
+            text-align: center;
+        }
+        .right p {
+            font-size: 17px;
+        }
+
+        .left {
+            font-size: 17px;
+        }
+
+        .pink {
+            background-color: #FFC0CB;
+        }
+
+        .grey {
+            background-color: #f0f0f0;
+        }
+        @media (max-width: 600px) {
+        .img-fluid {
+        max-width: 400px;
+    }
+}
+</style>
+
+{% endblock %}
+{% block title %}Flasky - guest{% endblock %}
+
+{% block page_content %}
+<div class="container" style="display: flex; justify-content: center; margin-bottom: 20px;">
+    <div class="page-header">
+        {% if session['username'] %}
+        <h1 style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;text-align: center;">
+            Welcome to Anastasian Kivi-galleria, {{ session['username'] }}!
+        </h1>
+        {% else %}
+        <h1 style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; text-align: center;">
+            Welcome to Anastasian Kivi-galleria, dear guest!
+        </h1>
+        {% endif %}
+    </div>
+</div>
+
+
+
+<div class="section pink">
+    <div class="left">
+        <h3 style="width: 400px; margin-top: 40px;margin-bottom: 50px;">Collecting minerals</h3>
+        <p style="width: 400px;margin-bottom: 20px;">
+            There are many reasons to collect minerals. Many minerals are extremely beautiful and therefore collected for their aesthetic value. Others collect to learn more about mineralogy, explore the outdoors, and socialize/trade with other mineral collectors. This website's purpose is to serve as a guide and demonstrate the steps taken by beginners in Mineralogy. This site will be especially useful for those living in Finland & Europe.
+        </p>
+    </div>
+    <div class="right">
+        <img class="img-fluid" src="{{ url_for('static', filename='section1.jpg') }}" alt="Section 1 Image">
+    </div>
+</div>
+
+<div class="section grey">
+    <div class="left">
+        <img class="img-fluid" src="{{ url_for('static', filename='section2.jpg') }}" alt="Section 2 Image">
+    </div>
+    <div class="right">
+        <h3 style="width: 400px; margin-top: 40px; margin-bottom: 50px;">Field Collecting</h3>
+        <p style="width: 400px;margin-bottom: 20px;">
+            Field collection is a unique part of mineral collection. Some places in the world are perfect for field collecting while others aren't, either because there's no nearby mineral localities or the mines aren't accessible to outsiders. This website's Collection section offers several examples of where fossils, amber, etc. can be found naturally in Finland & Northern Europe.
+        </p>
+    </div>
+</div>
+
+<div class="section pink">
+    <div class="left">
+        <h3 style="width: 400px; margin-top: 40px; margin-bottom: 50px;">Metaphysical properties</h3>
+        <p style="width: 400px;margin-bottom: 20px;">
+            For centuries, man has sought out minerals, gems, and crystals for their healing powers. Even the ancient Egyptians and the ancient Greeks believed that precious stones such as quartz, lapis lazuli, turquoise, and emerald had healing benefits and the ability to ward off danger.
+        </p>
+    </div>
+    <div class="right">
+        <img class="img-fluid" src="{{ url_for('static', filename='section33.jpg') }}" alt="Section 3 Image">
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+

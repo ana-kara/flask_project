@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Flasky - collection{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script>
+    $(document).ready(function() {
+      $('#example').DataTable(
+        {
+        paging: false,
+        destroy: true,
+        initComplete: function () {
+            this.api()
+                .columns()
+                .every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+  
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+  
+                    column
+                        .data()
+                        .unique()
+                        .sort()
+                        .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                });
+        },
+    });
+  });
+  </script>
+{% endblock %}
+{% block page_content %}
+<div class="container-fluid" style="max-width: 1258px;">
+  <div class="table-responsive">
+    <table id="example" class="table table-striped">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>pic</th>
+            <th>price (euro)</th>
+            <th>dimensions (cm)</th>
+            <th>acquired</th>
+            <th>acquisition year</th>
+            <th>mined</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td><a href="kokoelma/{{ row[1]}}">{{ row[1] }}</a></td>
+            <td><a href="kokoelma/{{ row[1]}}"><img style="height:100px;" src="{{ url_for('static', filename=row[2])}}"></a></td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>{{ row[7] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+</div>
+
+
+{% endblock %}

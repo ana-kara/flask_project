@@ -1,0 +1,81 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Flasky{% endblock %}
+{% block styles %}
+  {{ super() }}
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
+  {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    const logoutBtn = document.querySelector('#logout-btn');
+    logoutBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const confirmLogout = confirm('Are you sure you want to log out?');
+      if (confirmLogout) {
+        window.location.href = logoutBtn.href;
+      }
+    });
+
+  </script>
+  
+  
+{% endblock %}
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+{% block navbar %}
+<nav class="navbar navbar-inverse" role="navigation" style="margin-bottom: 0%;">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Home</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="/kokoelma">Collection</a></li>
+        <li><a href="/classify">Mineral identification</a></li>
+        <li>
+          {% if session['username'] %}
+            <a id="logout-btn" href="/logout">Log out</a>
+          {% else %}
+            <a href="/register">Create account</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="bd-example" align="middle">
+    <img style="padding-bottom:50px ;" src="{{url_for('static', filename='banner88.jpg')}}"align="middle" width="100%" max-height="50px"/>
+            
+</div>
+<div class="container-fluid">
+{% block page_content %}{% endblock %}
+</div>
+
+
+
+{% block footer %}
+<div class="container col-md-offset-5" style="width: 280px">
+    <div id="footer">
+    <p>&copy; 2023 Anastasian Kivi-galleria</p>
+  </div>
+</div>
+{% endblock %}
+{% endblock %}
+
